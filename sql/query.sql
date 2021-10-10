@@ -41,3 +41,4 @@ delete from category where no > 0;
 ALTER TABLE member AUTO_INCREMENT = 0;
 ALTER TABLE book AUTO_INCREMENT = 0;
 ALTER TABLE category AUTO_INCREMENT = 0;
+commit;

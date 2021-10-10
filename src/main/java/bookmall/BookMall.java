@@ -9,7 +9,7 @@ import bookmall.vo.CartVo;
 import bookmall.vo.CategoryVo;
 import bookmall.vo.MemberVo;
 
-public class Test {
+public class BookMall {
 
 	public static void main(String[] args) {
 		MemberDao.deleteAll();
@@ -58,6 +58,7 @@ public class Test {
 		System.out.println();
 		
 		// 5. 주문 리스트 – 1개
+		
 		
 	}
 }
