@@ -59,7 +59,7 @@ public class CategoryDao {
 		try {
 			conn = DBConn.getConn();
 			
-			String sql = "insert into Category values(null, ?)";
+			String sql = "insert into category values(null, ?)";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, vo.getName());

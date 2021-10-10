@@ -6,6 +6,17 @@ public class CartVo {
 	private int member_no;
 	private int count;
 
+	public CartVo() {
+		super();
+	}
+
+	public CartVo(int book_no, int member_no, int count) {
+		super();
+		this.book_no = book_no;
+		this.member_no = member_no;
+		this.count = count;
+	}
+
 	public int getBook_no() {
 		return book_no;
 	}

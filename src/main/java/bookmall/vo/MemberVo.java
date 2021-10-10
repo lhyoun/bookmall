@@ -7,6 +7,18 @@ public class MemberVo {
 	private String email;
 	private String password;
 	private String tel;
+	
+	public MemberVo() {
+		super();
+	}
+
+	public MemberVo(String name, String email, String password, String tel) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.tel = tel;
+	}
 
 	public int getNo() {
 		return no;
