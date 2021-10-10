@@ -1,19 +1,19 @@
 package bookmall.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bookmall.dto.BookDto;
 import bookmall.vo.BookVo;
 
 public class BookDao {
 	
-	public static List<BookVo> findAll() {
-		List<BookVo> result = new ArrayList<BookVo>();
+	public static List<BookDto> findAll() {
+		List<BookDto> result = new ArrayList<BookDto>();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -22,7 +22,12 @@ public class BookDao {
 		try {
 			conn = DBConn.getConn();
 			
-			String sql = "select * from book";
+			String sql = "SELECT a.no    AS no,"
+					+ "          a.title AS 제목,"
+					+ "          a.price AS 가격, "
+					+ "	         b.name  AS 카테고리"
+					+ "   FROM   book a"
+					+ "   INNER  JOIN category b ON a.category_no = b.no";
 			pstmt = conn.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
@@ -30,21 +35,30 @@ public class BookDao {
 				int no = rs.getInt(1);
 				String title = rs.getString(2);
 				int price = rs.getInt(3);
-				int category_no = rs.getInt(4);
+				String category_name = rs.getString(4);
 				
-				BookVo vo = new BookVo();
-				vo.setNo(no);
-				vo.setTitle(title);
-				vo.setPrice(price);
-				vo.setCategory_no(category_no);
+				BookDto dto = new BookDto();
+				dto.setNo(no);
+				dto.setTitle(title);
+				dto.setPrice(price);
+				dto.setCategory_name(category_name);
 				
-				result.add(vo);
+				result.add(dto);
 			}
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {
 			DBConn.close(conn, pstmt, rs);
-		}		
+		}
+		
+		System.out.println("***** Book List *****");
+		
+		for(BookDto dto : result) {
+			System.out.println(dto);
+		}
+		
+		System.out.println("*** Book List END ***");
+		
 		return result;
 	}
 	
@@ -71,6 +85,10 @@ public class BookDao {
 		} finally {
 			DBConn.close(conn, pstmt);
 		}
+		
+		if(result) System.out.println("*** Insert[o] ***");
+		else System.out.println("*** Insert[x] ***");
+		
 		return result;
 	}
 }
