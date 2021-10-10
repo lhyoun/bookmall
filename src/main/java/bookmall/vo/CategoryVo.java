@@ -4,6 +4,15 @@ public class CategoryVo {
 
 	private int no;
 	private String name;
+		
+	public CategoryVo() {
+		super();
+	}
+
+	public CategoryVo(String name) {
+		super();
+		this.name = name;
+	}
 
 	public int getNo() {
 		return no;

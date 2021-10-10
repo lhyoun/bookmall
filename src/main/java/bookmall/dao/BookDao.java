@@ -86,8 +86,36 @@ public class BookDao {
 			DBConn.close(conn, pstmt);
 		}
 		
-		if(result) System.out.println("*** Insert[o] ***");
-		else System.out.println("*** Insert[x] ***");
+		if(result) System.out.println("*** Insert book[o] ***");
+		else System.out.println("*** Insert book[x] ***");
+		
+		return result;
+	}
+	
+	public static boolean deleteAll() {
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DBConn.getConn();
+			
+			String sql = "delete from book where no > '0'";
+
+			pstmt = conn.prepareStatement(sql);
+			
+			int count = pstmt.executeUpdate();
+
+			result = count >= 1;
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			DBConn.close(conn, pstmt);
+		}
+		
+		if(result) System.out.println("** Delete book table[o] **");
+		else System.out.println("** Delete book table[x] **");
 		
 		return result;
 	}
