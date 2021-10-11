@@ -20,7 +20,7 @@ public class BookMall {
 		// 1. 회원 리스트 – 2명
 		MemberDao.findAll();
 		MemberVo memberVo1 = new MemberVo("이하윤", "lhyoundev@gmail.com", "qwe123", "010-5023-9050");
-		MemberVo memberVo2 = new MemberVo("이상아", "lsaoundev@gmail.com", "asd321", "010-5123-9510");
+		MemberVo memberVo2 = new MemberVo("장은주", "lsaoundev@gmail.com", "asd321", "010-5123-9510");
 		MemberDao.insert(memberVo1);
 		MemberDao.insert(memberVo2);
 		MemberDao.findAll();
