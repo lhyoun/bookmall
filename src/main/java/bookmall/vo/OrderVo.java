@@ -8,6 +8,18 @@ public class OrderVo {
 	private String address;
 	private int member_no;
 
+	public OrderVo() {
+		super();
+	}
+
+	public OrderVo(String order_number, int price, String address, int member_no) {
+		super();
+		this.order_number = order_number;
+		this.price = price;
+		this.address = address;
+		this.member_no = member_no;
+	}
+
 	public int getNo() {
 		return no;
 	}

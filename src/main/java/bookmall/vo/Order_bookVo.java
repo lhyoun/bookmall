@@ -7,6 +7,18 @@ public class Order_bookVo {
 	private int count;
 	private int price;
 
+	public Order_bookVo() {
+		super();
+	}
+
+	public Order_bookVo(int order_no, int book_no, int count, int price) {
+		super();
+		this.order_no = order_no;
+		this.book_no = book_no;
+		this.count = count;
+		this.price = price;
+	}
+
 	public int getOrder_no() {
 		return order_no;
 	}
