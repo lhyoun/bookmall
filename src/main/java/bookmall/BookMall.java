@@ -57,8 +57,9 @@ public class BookMall {
 		CartDao.findAll();
 		System.out.println();
 		
-		// 5. 주문 리스트 – 1개
+		// 5. 주문 리스트 – 1개 & 6. 주문 도서 리스트 – 2개
 		
+
 		
 	}
 }

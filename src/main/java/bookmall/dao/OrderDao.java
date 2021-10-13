@@ -9,33 +9,28 @@ import java.util.List;
 
 import bookmall.dto.OrderDto;
 import bookmall.vo.OrderVo;
+import bookmall.vo.Order_bookVo;
 
 public class OrderDao {
 
 	public static List<OrderDto> findAll() {
 		List<OrderDto> result = new ArrayList<OrderDto>();
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			conn = DBConn.getConn();
-			
-			String sql = "select a.no,"
-					+ "          a.order_number,"
-					+ "          a.price,"
-					+ "          a.address,"
-					+ "          b.name,"
-					+ "          b.tel,"
-					+ "          b.email"
-					+ "   from   bookmall.order a"
+
+			String sql = "select a.no," + "          a.order_number," + "          a.price," + "          a.address,"
+					+ "          b.name," + "          b.tel," + "          b.email" + "   from   bookmall.order a"
 					+ "   inner  join member b on a.member_no = b.no";
 
 			pstmt = conn.prepareStatement(sql);
-			
+
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				int no = rs.getInt(1);
 				String order_number = rs.getString(2);
 				int price = rs.getInt(3);
@@ -43,7 +38,7 @@ public class OrderDao {
 				String name = rs.getString(5);
 				String email = rs.getString(6);
 				String tel = rs.getString(7);
-				
+
 				OrderDto dto = new OrderDto();
 				dto.setNo(no);
 				dto.setOrder_number(order_number);
@@ -52,7 +47,7 @@ public class OrderDao {
 				dto.setName(name);
 				dto.setEmail(email);
 				dto.setTel(tel);
-				
+
 				result.add(dto);
 			}
 		} catch (SQLException e) {
@@ -60,75 +55,156 @@ public class OrderDao {
 		} finally {
 			DBConn.close(conn, pstmt, rs);
 		}
-		
+
 		System.out.println("***** Order List *****");
-		
-		for(OrderDto dto : result) {
+
+		for (OrderDto dto : result) {
 			System.out.println(dto);
 		}
-		
+
 		System.out.println("*** Order List END ***");
-		
+
 		return result;
 	}
-	
+
 	public static boolean insert(OrderVo vo) {
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			conn = DBConn.getConn();
-			
+
 			String sql = "insert into bookmall.order values(?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setInt(1, vo.getNo());
 			pstmt.setString(2, vo.getOrder_number());
 			pstmt.setInt(3, vo.getPrice());
 			pstmt.setString(4, vo.getAddress());
 			pstmt.setInt(5, vo.getMember_no());
-			
+
 			int count = pstmt.executeUpdate();
-			
+
 			result = count == 1;
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {
 			DBConn.close(conn, pstmt);
 		}
-		
-		if(result) System.out.println("*** Insert order[o] ***");
-		else System.out.println("*** Insert order[x] ***");
-		
+
+		if (result)
+			System.out.println("*** Insert order[o] ***");
+		else
+			System.out.println("*** Insert order[x] ***");
+
 		return result;
 	}
-	
+
 	public static boolean deleteAll() {
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			conn = DBConn.getConn();
-			
+
 			String sql = "delete from cart";
 
 			pstmt = conn.prepareStatement(sql);
-			
+
 			int count = pstmt.executeUpdate();
 
 			result = count >= 1;
-			
+
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {
 			DBConn.close(conn, pstmt);
 		}
-		
-		if(result) System.out.println("** Delete book table[o] **");
-		else System.out.println("** Delete book table[x] **");
-		
+
+		if (result)
+			System.out.println("** Delete book table[o] **");
+		else
+			System.out.println("** Delete book table[x] **");
+
 		return result;
+	}
+
+	public static void insert(OrderVo vo, List<Order_bookVo> order_list) {
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			System.out.println("zzz1");
+			conn = DBConn.getConn();
+			conn.setAutoCommit(false); // AutoCommit을 false로 변경
+
+			String sql = "insert into bookmall.order values(?, ?, ?, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, vo.getNo());
+			pstmt.setString(2, vo.getOrder_number());
+			pstmt.setInt(3, vo.getPrice());
+			pstmt.setString(4, vo.getAddress());
+			pstmt.setInt(5, vo.getMember_no());
+
+			int count = pstmt.executeUpdate();
+
+			//DBConn.close(conn, pstmt);
+			result = count == 1;
+			insertCheck(result);
+			System.out.println("zzz2");
+			for (Order_bookVo forVo : order_list) {
+				System.out.println("zzz3");
+				System.out.println("장장장"+forVo);
+				String sql2 = "insert into order_book values(?, ?, ?, ?)";
+
+				pstmt = conn.prepareStatement(sql2);
+
+				pstmt.setInt(1, forVo.getOrder_no());
+				pstmt.setInt(2, forVo.getBook_no());
+				pstmt.setInt(3, forVo.getCount());
+				pstmt.setInt(4, forVo.getPrice());
+
+				int count2 = pstmt.executeUpdate();
+				
+				//DBConn.close(conn, pstmt);
+				result = count2 == 1;
+				insertCheck(result);
+			}
+			System.out.println("zzz4");
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			System.out.println("throw");
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} finally {
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} // AutoCommit을 다시 true로 변경
+				// DBConn.close(conn, pstmt);
+		}
+
+		if (result)
+			System.out.println("*** Insert order[o] ***");
+		else
+			System.out.println("*** Insert order[x] ***");
+
+	}
+
+	private static void insertCheck(boolean result) throws Exception {
+		System.out.println("insertcheck");
+		if (!result)
+			throw new Exception("Insert과정에서 오류가 발생하였습니다");
 	}
 }
