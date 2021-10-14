@@ -137,9 +137,8 @@ public class OrderDao {
 		PreparedStatement pstmt = null;
 
 		try {
-			System.out.println("zzz1");
 			conn = DBConn.getConn();
-			conn.setAutoCommit(false); // AutoCommit을 false로 변경
+			conn.setAutoCommit(false); // AutoCommit => false
 
 			String sql = "insert into bookmall.order values(?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
@@ -152,13 +151,10 @@ public class OrderDao {
 
 			int count = pstmt.executeUpdate();
 
-			//DBConn.close(conn, pstmt);
 			result = count == 1;
 			insertCheck(result);
-			System.out.println("zzz2");
+			
 			for (Order_bookVo forVo : order_list) {
-				System.out.println("zzz3");
-				System.out.println("장장장"+forVo);
 				String sql2 = "insert into order_book values(?, ?, ?, ?)";
 
 				pstmt = conn.prepareStatement(sql2);
@@ -170,15 +166,12 @@ public class OrderDao {
 
 				int count2 = pstmt.executeUpdate();
 				
-				//DBConn.close(conn, pstmt);
 				result = count2 == 1;
 				insertCheck(result);
 			}
-			System.out.println("zzz4");
 
 		} catch (Throwable e) {
 			e.printStackTrace();
-			System.out.println("throw");
 			if (conn != null) {
 				try {
 					conn.rollback();
@@ -191,8 +184,8 @@ public class OrderDao {
 				conn.setAutoCommit(true);
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} // AutoCommit을 다시 true로 변경
-				// DBConn.close(conn, pstmt);
+			} 
+			DBConn.close(conn, pstmt);
 		}
 
 		if (result)
@@ -203,8 +196,6 @@ public class OrderDao {
 	}
 
 	private static void insertCheck(boolean result) throws Exception {
-		System.out.println("insertcheck");
-		if (!result)
-			throw new Exception("Insert과정에서 오류가 발생하였습니다");
+		if (!result) throw new Exception("Insert[x]");
 	}
 }

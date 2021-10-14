@@ -68,9 +68,9 @@ public class CartDto {
 
 	@Override
 	public String toString() {
-		return "CartDto [수량=" + count + ", <<책제목=" + book_title + ", 책가격=" + book_price
-				+ ", 책카테고리=" + book_category_name + ">>, <<회원이름=" + member_name + ", 회원전화번호="
-				+ member_tel + ", 회원email=" + member_email + ">>]";
+		return "CartDto [count=" + count + ", book_title=" + book_title + ", book_price=" + book_price
+				+ ", book_category_name=" + book_category_name + ", member_name=" + member_name + ", member_tel="
+				+ member_tel + ", member_email=" + member_email + "]";
 	}
 
 }

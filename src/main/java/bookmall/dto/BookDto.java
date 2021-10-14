@@ -41,7 +41,7 @@ public class BookDto {
 
 	@Override
 	public String toString() {
-		return "BookDto [no=" + no + ", 제목=" + title + ", 가격=" + price + ", 카테고리=" + category_name + "]";
+		return "BookDto [no=" + no + ", title=" + title + ", price=" + price + ", category_name=" + category_name + "]";
 	}
 
 }

@@ -10,7 +10,7 @@ public class MemberTest {
 		MemberDao.findAll();
 		
 		// insert test
-		MemberVo vo = new MemberVo("ÀÌÇÏÀ±", "lhyoundev@gmail.com", "qwe123", "010-5023-9050");
+		MemberVo vo = new MemberVo("ì´í•˜ìœ¤", "lhyoundev@gmail.com", "qwe123", "010-5023-1234");
 		MemberDao.insert(vo);
 		
 		// select test(insert)

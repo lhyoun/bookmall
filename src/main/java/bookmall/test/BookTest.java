@@ -8,7 +8,7 @@ public class BookTest {
 		// select test
 		BookDao.findAll();
 		
-		// insert test (Ã¥no, ¸É¹öno, ¼ö·®)
+		// insert test 
 		BookVo vo = new BookVo("novelBook", 18000, 1);
 
 		BookDao.insert(vo);

@@ -11,20 +11,17 @@ public class DBConn {
 	   public static Connection getConn() throws SQLException {
 	      Connection conn = null;
 	      try {
-	         // 1. JDBC Driver 로딩
 	         Class.forName("org.mariadb.jdbc.Driver");
 
-	         // 2. 연결하기
 	         String url = "jdbc:mysql://127.0.0.1:3306/bookmall?charset=utf8";
 	         conn = DriverManager.getConnection(url, "bookmall", "bookmall");
 	      } catch (ClassNotFoundException e) {
-	         System.out.println("드라이버 로딩 실패:" + e);
+	    	  e.printStackTrace();
 	      }
 
 	      return conn;
 	   }
 
-	   // select 수행한 수 리소스 해제를 위한 메소드
 	   public static void close(Connection conn, PreparedStatement ps, ResultSet rs) {
 	      try {
 	         if (rs != null)
@@ -38,7 +35,6 @@ public class DBConn {
 	      }
 	   }
 
-	   // DML(isert, update, delete)을 수행한 후 리소스 해제를 위한 메소드
 	   public static void close(Connection conn, PreparedStatement ps) {
 	      try {
 	         if (ps != null)

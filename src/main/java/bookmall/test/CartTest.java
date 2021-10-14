@@ -9,7 +9,7 @@ public class CartTest {
 		// select test
 		CartDao.findAll();
 		
-		// insert test (Ã¥no, ¸É¹öno, ¼ö·®)
+		// insert test 
 		CartVo vo = new CartVo(3, 1, 1);
 		CartDao.insert(vo);
 		

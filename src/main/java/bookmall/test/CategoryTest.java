@@ -10,7 +10,7 @@ public class CategoryTest {
 		CategoryDao.findAll();
 		
 		// insert test
-		CategoryVo vo = new CategoryVo("¼öÇÊ");
+		CategoryVo vo = new CategoryVo("ì†Œì„¤");
 		CategoryDao.insert(vo);
 		
 		// select test(insert)

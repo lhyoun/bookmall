@@ -1,26 +1,33 @@
 package bookmall;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import bookmall.dao.BookDao;
 import bookmall.dao.CartDao;
 import bookmall.dao.CategoryDao;
 import bookmall.dao.MemberDao;
+import bookmall.dao.OrderDao;
+import bookmall.dao.Order_bookDao;
 import bookmall.vo.BookVo;
 import bookmall.vo.CartVo;
 import bookmall.vo.CategoryVo;
 import bookmall.vo.MemberVo;
+import bookmall.vo.OrderVo;
+import bookmall.vo.Order_bookVo;
 
 public class BookMall {
 
 	public static void main(String[] args) {
-		MemberDao.deleteAll();
-		BookDao.deleteAll();
-		CategoryDao.deleteAll();
-		System.out.println();
+		//MemberDao.deleteAll();
+		//BookDao.deleteAll();
+		//CategoryDao.deleteAll();
+		//System.out.println();
 		
 		// 1. 회원 리스트 – 2명
 		MemberDao.findAll();
-		MemberVo memberVo1 = new MemberVo("이하윤", "lhyoundev@gmail.com", "qwe123", "010-5023-9050");
-		MemberVo memberVo2 = new MemberVo("장은주", "lsaoundev@gmail.com", "asd321", "010-5123-9510");
+		MemberVo memberVo1 = new MemberVo("이하윤", "dlgkdbs@gmail.com", "gkdbs", "010-1234-4321");
+		MemberVo memberVo2 = new MemberVo("장은주", "wkddmswn@gmail.com", "dmswn", "010-4321-1234");
 		MemberDao.insert(memberVo1);
 		MemberDao.insert(memberVo2);
 		MemberDao.findAll();
@@ -58,9 +65,19 @@ public class BookMall {
 		System.out.println();
 		
 		// 5. 주문 리스트 – 1개 & 6. 주문 도서 리스트 – 2개
+		OrderDao.findAll();
+		Order_bookDao.findAll();
 		
-
+		OrderVo vo = new OrderVo("2021-book-01", 60000, "부산광역시 해운대구", 1);
 		
+		List<Order_bookVo> orderList = new ArrayList<Order_bookVo>();
+		orderList.add(new Order_bookVo(1, 1, 1, 25000));
+		orderList.add(new Order_bookVo(1, 2, 1, 35000));
+		
+		OrderDao.insert(vo, orderList);
+		System.out.println("&&&&&&&&&& 책 2권 주문 완료 &&&&&&&&&");
+		OrderDao.findAll();
+		Order_bookDao.findAll();
 	}
 }
 

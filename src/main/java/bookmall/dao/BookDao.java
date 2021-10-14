@@ -22,10 +22,10 @@ public class BookDao {
 		try {
 			conn = DBConn.getConn();
 			
-			String sql = "SELECT a.no    AS no,"
-					+ "          a.title AS 제목,"
-					+ "          a.price AS 가격, "
-					+ "	         b.name  AS 카테고리"
+			String sql = "SELECT a.no    ,"
+					+ "          a.title ,"
+					+ "          a.price , "
+					+ "	         b.name  "
 					+ "   FROM   book a"
 					+ "   INNER  JOIN category b ON a.category_no = b.no";
 			pstmt = conn.prepareStatement(sql);

@@ -15,10 +15,10 @@ public class OrderTest {
 		OrderDao.findAll();
 		
 		// insert test 
-		OrderVo vo = new OrderVo("book-001", 15000, "ºÎ»ê±¤¿ª½Ã", 1);
+		OrderVo vo = new OrderVo("book-001", 15000, "ï¿½Î»ê±¤ï¿½ï¿½ï¿½ï¿½", 1);
 		
-		Order_bookVo OBVo1 = new Order_bookVo(15, 1, 10, 25000);
-		Order_bookVo OBVo2 = new Order_bookVo(15, 2, 11, 35000);
+		Order_bookVo OBVo1 = new Order_bookVo(1, 1, 1, 25000);
+		Order_bookVo OBVo2 = new Order_bookVo(1, 2, 1, 35000);
 
 		List<Order_bookVo> orderList = new ArrayList<Order_bookVo>();
 		orderList.add(OBVo1);
@@ -27,10 +27,5 @@ public class OrderTest {
 		
 		// select test(insert)
 		OrderDao.findAll();
-		
-		//OrderDao.deleteAll();
-		
-		// select test(delete)
-		//OrderDao.findAll();
 	}
 }

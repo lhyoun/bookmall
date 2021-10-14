@@ -21,13 +21,13 @@ public class CartDao {
 		try {
 			conn = DBConn.getConn();
 			
-			String sql = "SELECT a.count    AS 수량,"
-					+ "          b.title    AS 책제목,"
-					+ "          b.price    AS 책가격,"
-					+ "          c.name     AS 책카테고리,"
-					+ "          d.name     AS 주문자이름,"
-					+ "          d.tel      AS 주문자연락처,"
-					+ "          d.email    AS 주문자이메일"
+			String sql = "SELECT a.count    ,"
+					+ "          b.title    ,"
+					+ "          b.price    ,"
+					+ "          c.name     ,"
+					+ "          d.name     ,"
+					+ "          d.tel      ,"
+					+ "          d.email    "
 					+ "   FROM   cart a"
 					+ "   INNER  JOIN book     b ON a.book_no     = b.no"
 					+ "   INNER  JOIN category c ON b.category_no = c.no"
