@@ -15,7 +15,7 @@ public class OrderTest {
 		OrderDao.findAll();
 		
 		// insert test 
-		OrderVo vo = new OrderVo("book-001", 15000, "�λ걤����", 1);
+		OrderVo vo = new OrderVo("book-001", 15000, "JAVA", 1);
 		
 		Order_bookVo OBVo1 = new Order_bookVo(1, 1, 1, 25000);
 		Order_bookVo OBVo2 = new Order_bookVo(1, 2, 1, 35000);
